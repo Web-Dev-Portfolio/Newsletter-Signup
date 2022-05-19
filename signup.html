@@ -20,12 +20,12 @@
 </head>
 
 <body class="text-center">
-  <form class="form-signin">
+  <form class="form-signin" action="/" method="post">
     <img class="mb-4" src="images/passphoto.jpg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Sign up for newsletter</h1>
-    <input type="text" class="form-control top" placeholder="First name" required autofocus>
-    <input type="text" class="form-control middle" placeholder="Last name" required>
-    <input type="email" class="form-control below" placeholder="Email" required>
+    <input type="text" class="form-control top" placeholder="First name" required autofocus name="firstName">
+    <input type="text" class="form-control middle" placeholder="Last name" required name="lastName">
+    <input type="email" class="form-control below" placeholder="Email" required name="email">
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
