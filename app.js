@@ -1,24 +1,24 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const request = require("request");
-const app = express();
+const express = require("express")
+const bodyParser = require("body-parser")
+const request = require("request")
+const app = express()
 const https = require("https")
 
 
 
 app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ encoded : true }));
+app.use(bodyParser.urlencoded({ encoded : true }))
 
 app.get("/", function(req,res){
-  res.sendFile(__dirname + "/signup.html");
+  res.sendFile(__dirname + "/signup.html")
 })
 
 app.post("/", function(req,res){
 
-  const firstName = req.body.firstName;
+  const firstName = req.body.firstName
   const lastName = req.body.lastName
   const email = req.body.email
-  console.log(firstName,lastName,email);
+  console.log(firstName,lastName,email)
   const members = {
     members : [
       {
@@ -34,14 +34,27 @@ app.post("/", function(req,res){
   }
   const jsonData = JSON.stringify(members);
 
-  const url = "https://us8.api.mailchimp.com/3.0/lists/e00fc1594e";
+  const url = "https://us8.api.mailchimp.com/3.0/lists/e00fc1594e"
   const options = {
     method : "POST",
-    auth : "fitransyah:myAPIkey"
+    auth : "fitransyah:useyourAPIhere"
   }
   const request = https.request(url, options,function(response){
     response.on("data", function(data){
-      console.log(JSON.parse(data));
+      var dataJson = JSON.parse(data)
+      console.log(dataJson)
+
+      if (dataJson.error_count > 0)
+      {
+        console.log("Submit data has error!")
+      }
+      else {
+        console.log("Submit data success")
+      }
+
+      console.log("POST response : " +res.statusCode)
+      console.log("HTTPS response : "+response.statusCode)
+
     })
   })
   request.write(jsonData)
