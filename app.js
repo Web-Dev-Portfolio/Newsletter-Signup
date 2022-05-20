@@ -37,7 +37,7 @@ app.post("/", function(req,res){
   const url = "https://us8.api.mailchimp.com/3.0/lists/e00fc1594e"
   const options = {
     method : "POST",
-    auth : "fitransyah:efc83346ceb2ba3410d2593c9198c8ea-us8"
+    auth : "fitransyah:useyourAPIhere"
   }
   const request = https.request(url, options,function(response){
     response.on("data", function(data){
@@ -60,6 +60,10 @@ app.post("/", function(req,res){
   request.write(jsonData)
   request.end()
   //res.send("submitted");
+})
+
+app.post("/failure", function(req,res){
+  res.redirect("/")
 })
 
 app.listen(3000, function(){
