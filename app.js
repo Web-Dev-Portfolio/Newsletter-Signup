@@ -37,19 +37,19 @@ app.post("/", function(req,res){
   const url = "https://us8.api.mailchimp.com/3.0/lists/e00fc1594e"
   const options = {
     method : "POST",
-    auth : "fitransyah:useyourAPIhere"
+    auth : "fitransyah:efc83346ceb2ba3410d2593c9198c8ea-us8"
   }
   const request = https.request(url, options,function(response){
     response.on("data", function(data){
       var dataJson = JSON.parse(data)
       console.log(dataJson)
 
-      if (dataJson.error_count > 0)
+      if (dataJson.error_count > 0 || response.statusCode != 200)
       {
-        console.log("Submit data has error!")
+        res.sendFile(__dirname + "/failure.html")
       }
-      else {
-        console.log("Submit data success")
+      else if (dataJson.error_count === 0 && response.statusCode === 200){
+        res.sendFile(__dirname + "/success.html")
       }
 
       console.log("POST response : " +res.statusCode)
